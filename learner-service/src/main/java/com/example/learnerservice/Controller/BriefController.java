@@ -33,5 +33,10 @@ public class BriefController {
         return briefService.getBriefById(id);
     }
 
+    @DeleteMapping("/deleteBrief/{id}")
+    public void deleteBrief(@PathVariable Long id ){
+        briefService.DeleteBrief(id);
+    }
+
 
 }
