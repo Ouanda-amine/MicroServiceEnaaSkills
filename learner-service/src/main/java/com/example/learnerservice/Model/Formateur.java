@@ -13,21 +13,15 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Brief {
+
+public class Formateur {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private Long id;
-    private String titre ;
-    private String description ;
-    @ManyToOne
-    private Formateur formateur;
-    @Transient
-    private List<Competence> competences;
+    private String nom;
+    @OneToMany
+    private List<Brief> briefs;
 
 
-
-    
-
-   
 }

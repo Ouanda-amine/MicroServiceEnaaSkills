@@ -5,7 +5,9 @@ import com.example.learnerservice.Mapper.BriefMapper;
 import com.example.learnerservice.Model.Brief;
 import com.example.learnerservice.Repository.BriefRepo;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -14,6 +16,7 @@ import java.util.List;
 public class BriefService {
     private final BriefMapper briefMapper;
     private final BriefRepo briefRepo;
+    private RestTemplate restTemplate;
 
 
     public BriefDTO AddBrief(BriefDTO briefDTO){
@@ -41,6 +44,22 @@ public class BriefService {
 
     public void DeleteBrief(Long id){
         briefRepo.deleteById(id);
+    }
+
+    public BriefDTO getBriefWithCompetences(Long briefId) {
+        Brief brief = briefRepo.findById(briefId).orElseThrow();
+
+        // Appel REST au service Competence
+        String competenceServiceUrl = "http://localhost:8081/competences/byBrief/" + briefId;
+        ResponseEntity<List<Competence>> response = restTemplate.exchange(
+                competenceServiceUrl,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<Competence>>() {}
+        );
+
+        brief.setCompetences(response.getBody());
+        return briefMapper.ToBriehDto(brief);
     }
 
 }
