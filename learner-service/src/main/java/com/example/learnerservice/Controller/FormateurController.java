@@ -15,7 +15,7 @@ public class FormateurController {
 
 
 
-    @PutMapping("/AddFormateur")
+    @PostMapping("/AddFormateur")
     public FormateurDTO AddFormateur(@RequestBody FormateurDTO formateurDTO){
         return formateurService.AddFormateur(formateurDTO);
     }
@@ -32,6 +32,6 @@ public class FormateurController {
 
     @GetMapping("/formateur/{id}")
     public FormateurDTO getFormateurById(Long id){
-        return for
+        return formateurService.getFormateurById(id);
     }
 }

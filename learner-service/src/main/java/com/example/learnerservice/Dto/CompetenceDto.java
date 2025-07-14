@@ -5,14 +5,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class BriefDTO {
-    private Long id;
-    private String titre;
-    private String description;
-    private Long idFormateur;
-
+@Getter
+@Setter
+public class CompetenceDto {
+    private Long id ;
+    private String nom ;
+    private Long briefId;
 }

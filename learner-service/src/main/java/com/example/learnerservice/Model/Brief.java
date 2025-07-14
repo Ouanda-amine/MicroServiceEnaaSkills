@@ -22,8 +22,18 @@ public class Brief {
     private String description ;
     @ManyToOne
     private Formateur formateur;
-    @Transient
-    private List<Competence> competences;
+
+    @ElementCollection
+    private List<Long> competencesIds ;
+
+
+
+
+
+
+
+
+
 
 
 
