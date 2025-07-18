@@ -1,0 +1,25 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: learner-service
+          uri: lb://LEARNER-SERVICE
+          predicates:
+            - Path=/learner/**
+          filters:
+            - AuthFilter
+
+
+        - id: Utilisateur
+          uri: lb://UTILISATEUR
+          predicates:
+            - Path=/auth/**
